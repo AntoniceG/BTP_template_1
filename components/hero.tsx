@@ -8,9 +8,10 @@ import { Button } from "@/components/ui/button"
 const slides = siteConfig.services.map((service) => ({
   title: service.title,
   description: service.description,
+  image: (service as any).image,
 }))
 
-const INTERVAL = 4000
+const INTERVAL = 5000
 
 export function Hero() {
   const [activeIndex, setActiveIndex] = useState(0)
@@ -34,19 +35,34 @@ export function Hero() {
   }, [advanceSlide])
 
   return (
-    <section className="relative flex min-h-screen items-center overflow-hidden bg-[#1F2A36]">
-      {/* Subtle geometric background pattern */}
+    <section className="relative flex min-h-screen items-center overflow-hidden bg-[#121921]">
+      {/* Background Images with Crossfade */}
+      <div className="absolute inset-0 z-0">
+        {slides.map((slide, i) => (
+          <div
+            key={`hero-bg-${i}`}
+            className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-all duration-1000 ease-in-out"
+            style={{
+              backgroundImage: `url("${slide.image}")`,
+              opacity: activeIndex === i ? 0.35 : 0,
+              transform: `scale(${activeIndex === i ? 1.05 : 1.1})`,
+              transition: "opacity 1.5s ease-in-out, transform 8s linear",
+            }}
+          />
+        ))}
+        {/* Overlays for depth and readability */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[#1F2A36] via-[#1F2A36]/80 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#1F2A36] via-transparent to-transparent" />
+      </div>
+
+      {/* Subtle geometric background pattern overlay */}
       <div
-        className="absolute inset-0 opacity-[0.04]"
+        className="absolute inset-0 z-[1] opacity-[0.03]"
         style={{
           backgroundImage:
             "url(\"data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fillRule='evenodd'%3E%3Cg fill='%23ffffff' fillOpacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\")",
         }}
       />
-
-      {/* Gradient accents */}
-      <div className="absolute right-0 top-0 h-full w-1/2 bg-gradient-to-l from-[#C9A24D]/[0.06] to-transparent" />
-      <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-t from-[#1F2A36] to-transparent" />
 
       {/* Content */}
       <div className="relative z-10 mx-auto w-full max-w-7xl px-4 py-32 sm:px-6 lg:px-8">
@@ -73,9 +89,8 @@ export function Hero() {
               return (
                 <span
                   key={slide.title}
-                  className={`block w-full text-balance leading-tight ${
-                    isActive ? "relative" : "absolute left-0 top-0"
-                  }`}
+                  className={`block w-full text-balance leading-tight ${isActive ? "relative" : "absolute left-0 top-0"
+                    }`}
                   style={{
                     color: "#F9FAFB",
                     transition: "opacity 0.8s ease, transform 0.8s ease",
@@ -105,9 +120,8 @@ export function Hero() {
               return (
                 <p
                   key={slide.title}
-                  className={`w-full text-lg leading-relaxed text-[#E5E7EB] sm:text-xl ${
-                    isActive ? "relative" : "absolute left-0 top-0"
-                  }`}
+                  className={`w-full text-lg leading-relaxed text-[#E5E7EB] sm:text-xl ${isActive ? "relative" : "absolute left-0 top-0"
+                    }`}
                   style={{
                     transition: "opacity 0.8s ease 0.15s",
                     opacity: isActive ? 1 : 0,

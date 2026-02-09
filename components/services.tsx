@@ -44,25 +44,22 @@ export function Services() {
         <div className="mb-20 flex flex-col items-start gap-6 lg:flex-row lg:items-end lg:justify-between">
           <div className="max-w-2xl">
             <div
-              className={`mb-6 h-1 w-16 rounded-full bg-[#C9A24D] transition-all duration-700 ${
-                isVisible ? "opacity-100 w-16" : "opacity-0 w-0"
-              }`}
+              className={`mb-6 h-1 w-16 rounded-full bg-[#C9A24D] transition-all duration-700 ${isVisible ? "opacity-100 w-16" : "opacity-0 w-0"
+                }`}
             />
             <p
-              className={`mb-4 text-sm font-semibold uppercase tracking-[0.2em] text-[#C9A24D] transition-all duration-700 ${
-                isVisible
+              className={`mb-4 text-sm font-semibold uppercase tracking-[0.2em] text-[#C9A24D] transition-all duration-700 ${isVisible
                   ? "opacity-100 translate-y-0"
                   : "opacity-0 translate-y-6"
-              }`}
+                }`}
             >
               Nos prestations
             </p>
             <h2
-              className={`font-serif text-4xl font-bold leading-[1.15] tracking-tight text-[#F9FAFB] sm:text-5xl transition-all duration-700 delay-100 ${
-                isVisible
+              className={`font-serif text-4xl font-bold leading-[1.15] tracking-tight text-[#F9FAFB] sm:text-5xl transition-all duration-700 delay-100 ${isVisible
                   ? "opacity-100 translate-y-0"
                   : "opacity-0 translate-y-6"
-              }`}
+                }`}
             >
               <span className="text-balance">
                 Des solutions{" "}
@@ -71,11 +68,10 @@ export function Services() {
               </span>
             </h2>
             <p
-              className={`mt-5 max-w-lg text-lg leading-relaxed text-[#E5E7EB]/70 transition-all duration-700 delay-200 ${
-                isVisible
+              className={`mt-5 max-w-lg text-lg leading-relaxed text-[#E5E7EB]/70 transition-all duration-700 delay-200 ${isVisible
                   ? "opacity-100 translate-y-0"
                   : "opacity-0 translate-y-6"
-              }`}
+                }`}
             >
               De la conception {"\u00e0"} la {"\u00e9alisation"}, nous prenons en
               charge {"l\u2019int\u00e9gralit\u00e9"} de vos travaux avec
@@ -84,11 +80,10 @@ export function Services() {
           </div>
           <a
             href="#quote"
-            className={`group hidden items-center gap-2 text-sm font-semibold text-[#C9A24D] transition-all duration-700 delay-300 hover:gap-3 lg:flex ${
-              isVisible
+            className={`group hidden items-center gap-2 text-sm font-semibold text-[#C9A24D] transition-all duration-700 delay-300 hover:gap-3 lg:flex ${isVisible
                 ? "opacity-100 translate-y-0"
                 : "opacity-0 translate-y-6"
-            }`}
+              }`}
           >
             Demander un devis
             <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
@@ -102,32 +97,41 @@ export function Services() {
             return (
               <div
                 key={service.title}
-                className={`group relative overflow-hidden rounded-xl border border-[#E5E7EB]/10 bg-[#F9FAFB]/[0.04] p-8 backdrop-blur-sm transition-all duration-700 hover:border-[#C9A24D]/30 hover:bg-[#F9FAFB]/[0.07] ${
-                  isVisible
+                className={`group relative min-h-[300px] overflow-hidden rounded-xl border border-[#E5E7EB]/10 bg-[#1F2A36] transition-all duration-700 hover:border-[#C9A24D]/40 ${isVisible
                     ? "opacity-100 translate-y-0"
                     : "opacity-0 translate-y-10"
-                }`}
+                  }`}
                 style={{
                   transitionDelay: isVisible ? `${400 + index * 150}ms` : "0ms",
                 }}
               >
-                <div className="flex items-center gap-3">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-sm bg-[#C9A24D]/20">
-                    <Icon className="h-6 w-6 text-[#C9A24D]" />
+                {/* Background Image */}
+                <div
+                  className="absolute inset-0 z-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
+                  style={{ backgroundImage: `url("${(service as any).image}")` }}
+                />
+                {/* Overlay */}
+                <div className="absolute inset-0 z-[1] bg-gradient-to-t from-[#1F2A36] via-[#1F2A36]/80 to-[#1F2A36]/40 transition-opacity duration-500 group-hover:opacity-90" />
+
+                <div className="relative z-10 flex h-full flex-col justify-end p-8">
+                  <div className="flex items-center gap-3">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-sm bg-[#C9A24D]/20 backdrop-blur-md">
+                      <Icon className="h-6 w-6 text-[#C9A24D]" />
+                    </div>
+                    <h3 className="font-serif text-2xl font-bold text-[#F9FAFB]">
+                      {service.title}
+                    </h3>
                   </div>
-                  <h3 className="font-serif text-2xl font-bold text-[#F9FAFB]">
-                    {service.title}
-                  </h3>
-                </div>
-                <p className="mt-4 max-w-md text-sm leading-relaxed text-[#E5E7EB]/70">
-                  {service.description}
-                </p>
-                <div className="mt-5 flex items-center gap-2 text-sm font-semibold text-[#C9A24D] opacity-0 transition-all duration-300 group-hover:opacity-100">
-                  En savoir plus
-                  <ArrowRight className="h-3.5 w-3.5" />
+                  <p className="mt-4 max-w-md text-sm leading-relaxed text-[#E5E7EB]/80">
+                    {service.description}
+                  </p>
+                  <div className="mt-5 flex items-center gap-2 text-sm font-semibold text-[#C9A24D] opacity-0 transition-all duration-300 group-hover:opacity-100">
+                    En savoir plus
+                    <ArrowRight className="h-3.5 w-3.5" />
+                  </div>
                 </div>
                 {/* Accent line */}
-                <div className="absolute left-0 top-0 h-16 w-1 bg-[#C9A24D] transition-all duration-500 group-hover:h-full" />
+                <div className="absolute left-0 top-0 z-20 h-16 w-1 bg-[#C9A24D] transition-all duration-500 group-hover:h-full" />
               </div>
             )
           })}
@@ -140,28 +144,37 @@ export function Services() {
             return (
               <div
                 key={service.title}
-                className={`group relative overflow-hidden rounded-xl border border-[#E5E7EB]/10 bg-[#F9FAFB]/[0.04] p-6 backdrop-blur-sm transition-all duration-500 hover:border-[#C9A24D]/30 hover:bg-[#F9FAFB]/[0.07] ${
-                  isVisible
+                className={`group relative min-h-[250px] overflow-hidden rounded-xl border border-[#E5E7EB]/10 bg-[#1F2A36] transition-all duration-500 hover:border-[#C9A24D]/40 ${isVisible
                     ? "opacity-100 translate-y-0"
                     : "opacity-0 translate-y-10"
-                }`}
+                  }`}
                 style={{
                   transitionDelay: isVisible
                     ? `${700 + index * 100}ms`
                     : "0ms",
                 }}
               >
-                <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-sm bg-[#C9A24D]/15">
-                  <Icon className="h-5 w-5 text-[#C9A24D]" />
+                {/* Background Image */}
+                <div
+                  className="absolute inset-0 z-0 bg-cover bg-center grayscale-[0.5] transition-all duration-700 group-hover:scale-110 group-hover:grayscale-0"
+                  style={{ backgroundImage: `url("${(service as any).image}")` }}
+                />
+                {/* Overlay */}
+                <div className="absolute inset-0 z-[1] bg-gradient-to-t from-[#1F2A36] via-[#1F2A36]/90 to-[#1F2A36]/60 transition-opacity duration-500 group-hover:opacity-80" />
+
+                <div className="relative z-10 flex h-full flex-col justify-end p-6">
+                  <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-sm bg-[#C9A24D]/15 backdrop-blur-md">
+                    <Icon className="h-5 w-5 text-[#C9A24D]" />
+                  </div>
+                  <h3 className="font-serif text-lg font-semibold text-[#F9FAFB]">
+                    {service.title}
+                  </h3>
+                  <p className="mt-2 text-sm leading-relaxed text-[#E5E7EB]/70">
+                    {service.description}
+                  </p>
                 </div>
-                <h3 className="font-serif text-lg font-semibold text-[#F9FAFB]">
-                  {service.title}
-                </h3>
-                <p className="mt-2 text-sm leading-relaxed text-[#E5E7EB]/60">
-                  {service.description}
-                </p>
                 {/* Bottom accent line on hover */}
-                <div className="absolute bottom-0 left-0 h-0.5 w-0 bg-[#C9A24D] transition-all duration-500 group-hover:w-full" />
+                <div className="absolute bottom-0 left-0 z-20 h-0.5 w-0 bg-[#C9A24D] transition-all duration-500 group-hover:w-full" />
               </div>
             )
           })}
@@ -169,11 +182,10 @@ export function Services() {
 
         {/* Mobile CTA */}
         <div
-          className={`mt-12 flex justify-center lg:hidden transition-all duration-700 delay-1000 ${
-            isVisible
+          className={`mt-12 flex justify-center lg:hidden transition-all duration-700 delay-1000 ${isVisible
               ? "opacity-100 translate-y-0"
               : "opacity-0 translate-y-6"
-          }`}
+            }`}
         >
           <a
             href="#quote"
